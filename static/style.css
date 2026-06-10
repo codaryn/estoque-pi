@@ -79,6 +79,21 @@ body {
 
 .sidebar-nav { padding: 10px 0; flex: 1; overflow-y: auto; }
 
+.sidebar-footer {
+    padding: 10px 0 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.apresentacao-btn {
+    color: var(--primary) !important;
+    border-left-color: transparent !important;
+    text-decoration: none;
+}
+.apresentacao-btn:hover {
+    background: rgba(26, 188, 156, 0.08) !important;
+    color: var(--primary) !important;
+}
+
 .nav-item {
     display: flex;
     align-items: center;
