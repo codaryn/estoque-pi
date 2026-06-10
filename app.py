@@ -136,6 +136,9 @@ def atualizar_preco():
 @app.route('/api/limpar', methods=['POST'])
 def limpar_estoque():
     try:
+        data = request.json or {}
+        if data.get('senha') != 'fatecads':
+            return jsonify({'erro': 'Senha incorreta'}), 403
         df = pd.DataFrame(columns=['id', 'produto', 'quantidade', 'preco_unitario'])
         save_df(df)
         return jsonify({'mensagem': 'Estoque esvaziado com sucesso!'})

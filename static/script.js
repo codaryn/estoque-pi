@@ -292,19 +292,37 @@ async function applySortToAPI() {
 }
 
 // ─── CLEAR STOCK ─────────────────────────────────────
-async function clearStock() {
-    if (!confirm('Deseja esvaziar todo o estoque? Esta ação não pode ser desfeita.')) return;
+function clearStock() {
+    document.getElementById('input-senha').value = '';
+    document.getElementById('senha-error').style.display = 'none';
+    document.getElementById('passwordModal').classList.add('active');
+    setTimeout(() => document.getElementById('input-senha').focus(), 100);
+}
+
+function closePasswordModal(e) {
+    if (e && e.target !== document.getElementById('passwordModal')) return;
+    document.getElementById('passwordModal').classList.remove('active');
+}
+
+async function confirmClearStock() {
+    const senha = document.getElementById('input-senha').value;
 
     try {
         const res = await fetch('/api/limpar', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ senha })
         });
         const data = await res.json();
 
         if (res.ok) {
+            document.getElementById('passwordModal').classList.remove('active');
             showToast(data.mensagem, 'success');
             await loadStock();
+        } else if (res.status === 403) {
+            document.getElementById('senha-error').style.display = 'block';
+            document.getElementById('input-senha').value = '';
+            document.getElementById('input-senha').focus();
         } else {
             showToast(data.erro, 'error');
         }

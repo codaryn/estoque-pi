@@ -282,6 +282,29 @@
     </main>
 </div>
 
+<!-- PASSWORD MODAL -->
+<div class="modal-overlay" id="passwordModal" onclick="closePasswordModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e74c3c" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <h3 style="margin:0;color:#e74c3c;">Confirmação de Segurança</h3>
+        </div>
+        <p style="font-size:13px;color:#888;margin-bottom:16px;">Esta ação é irreversível. Digite a senha de administrador para confirmar o esvaziamento total do estoque.</p>
+        <div class="form-group">
+            <label>Senha</label>
+            <input type="password" id="input-senha" placeholder="Digite a senha" onkeydown="if(event.key==='Enter') confirmClearStock()">
+        </div>
+        <div id="senha-error" style="color:#e74c3c;font-size:12px;margin-top:-8px;margin-bottom:8px;display:none;">Senha incorreta. Tente novamente.</div>
+        <div class="modal-actions">
+            <button class="btn btn-outline" onclick="closePasswordModal()">Cancelar</button>
+            <button class="btn btn-danger" onclick="confirmClearStock()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                Confirmar
+            </button>
+        </div>
+    </div>
+</div>
+
 <!-- EDIT MODAL -->
 <div class="modal-overlay" id="editModal" onclick="closeEditModal(event)">
     <div class="modal" onclick="event.stopPropagation()">
